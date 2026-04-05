@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dogesh Frontend</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="bg-grid" aria-hidden="true"></div>
+    <div class="bg-glow bg-glow-1" aria-hidden="true"></div>
+    <div class="bg-glow bg-glow-2" aria-hidden="true"></div>
+
+    <main class="app-shell">
+      <section class="panel panel-auth">
+        <h1>Dogesh</h1>
+        <p class="muted">Simple web UI for your backend assistant.</p>
+
+        <label for="backendUrl">Backend URL</label>
+        <input id="backendUrl" type="text" placeholder="http://127.0.0.1:8000" />
+
+        <div class="auth-tabs" role="tablist" aria-label="Auth mode">
+          <button id="tabLogin" class="tab active" type="button">Login</button>
+          <button id="tabSignup" class="tab" type="button">Signup</button>
+        </div>
+
+        <form id="authForm" class="stack">
+          <label for="emailInput">Email</label>
+          <input id="emailInput" type="email" required placeholder="you@example.com" />
+
+          <label for="passwordInput">Password</label>
+          <input id="passwordInput" type="password" required placeholder="••••••••" />
+
+          <button id="authButton" class="btn" type="submit">Login</button>
+        </form>
+
+        <div class="status-row">
+          <span id="authState" class="badge">Not authenticated</span>
+          <button id="logoutBtn" class="link-btn" type="button">Logout</button>
+        </div>
+
+        <section id="setupPanel" class="setup-panel hidden">
+          <h3>Post-login Setup</h3>
+          <p class="muted setup-note">
+            Step 1: 10-second voice enrollment by saying "Dogesh" at least once. Step 2: add at least one provider API key.
+          </p>
+
+          <div class="setup-card">
+            <div class="setup-card-head">
+              <strong>Voice Setup</strong>
+              <span id="voiceSetupState" class="badge">Not started</span>
+            </div>
+            <p class="setup-help">
+              After login, say <em>Dogesh</em> at least once within 10 seconds. Then Dogesh listens for
+              <em>Hey Dogesh</em> automatically.
+            </p>
+            <p id="voiceTargetSentence" class="setup-help">Calibration phrase: Say "Dogesh" at least once.</p>
+            <button id="startVoiceSetupBtn" class="btn btn-sm" type="button">Run 10s Voice Setup</button>
+          </div>
+
+          <form id="apiKeysForm" class="setup-card stack">
+            <div class="setup-card-head">
+              <strong>Provider API Keys</strong>
+              <span id="apiKeysState" class="badge">Required</span>
+            </div>
+
+            <label for="groqKeyInput">GROQ_API_KEY</label>
+            <input id="groqKeyInput" type="password" placeholder="gsk_..." />
+
+            <label for="openrouterKeyInput">OPENROUTER_API_KEY</label>
+            <input id="openrouterKeyInput" type="password" placeholder="sk-or-v1-..." />
+
+            <label for="nvidiaKeyInput">NVIDIA_API_KEY</label>
+            <input id="nvidiaKeyInput" type="password" placeholder="nvapi-..." />
+
+            <label for="fireworksKeyInput">FIREWORKSAI_API_KEY</label>
+            <input id="fireworksKeyInput" type="password" placeholder="fw_..." />
+
+            <label for="basetenKeyInput">BASETEN_API_KEY</label>
+            <input id="basetenKeyInput" type="password" placeholder="..." />
+
+            <button id="saveKeysBtn" class="btn btn-sm" type="submit">Save API Keys</button>
+          </form>
+
+          <span id="setupState" class="badge">Setup incomplete</span>
+        </section>
+      </section>
+
+      <section class="panel panel-chat">
+        <div class="chat-head">
+          <h2>Assistant Chat</h2>
+          <div class="chat-head-right">
+            <span id="voiceState" class="badge">Voice idle</span>
+            <button id="clearBtn" class="link-btn" type="button">Clear</button>
+          </div>
+        </div>
+
+        <div id="messages" class="messages" aria-live="polite"></div>
+
+        <form id="chatForm" class="chat-form">
+          <textarea
+            id="queryInput"
+            rows="3"
+            placeholder="Ask Dogesh anything..."
+            required
+          ></textarea>
+          <div class="chat-actions">
+            <button id="micBtn" class="btn btn-ghost" type="button">Mic</button>
+            <button id="sendBtn" class="btn" type="submit">Send</button>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <script src="./app.js" defer></script>
+  </body>
+</html>

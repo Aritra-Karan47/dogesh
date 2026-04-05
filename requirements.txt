@@ -1,17 +1,11 @@
-# ── Core UI ──────────────────────────────────────────────────────────────────
-flet[all]
-
-# ── LLM Backend (MANDATORY – llmsays wraps Groq / Openrouter / NIM / Fireworks / Baseten)
+﻿fastapi
+uvicorn[standard]
+sqlmodel
+pydantic[email]
+python-jose[cryptography]
+passlib
+python-multipart
+python-dotenv
 llmsays
-
-# ── LLM provider SDK (used as openai-compat fallback inside LLMService)
-openai
-
-# ── Voice pipeline ────────────────────────────────────────────────────────────
-SpeechRecognition   # STT via Google / Sphinx
-pyttsx3               # Offline TTS (cross-platform)
-PyAudio             # Microphone access  (Linux: sudo apt install portaudio19-dev)
-
-# ── Utilities ─────────────────────────────────────────────────────────────────
-python-dotenv       # .env loading for local dev
-requests           # HTTP helper
+psycopg2-binary
+vosk
